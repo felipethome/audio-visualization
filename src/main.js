@@ -1,6 +1,7 @@
 import AudioConfig from './AudioConfig';
 import Background from './Background';
 import Sky from './Sky';
+import Earth from './Earth';
 import Particle from './Particle';
 import Utils from './Utils';
 
@@ -41,6 +42,7 @@ const ctx = canvas.getContext('2d');
 
 let sky;
 let background;
+let earth;
 const particles = [];
 
 const init = function () {
@@ -53,6 +55,13 @@ const init = function () {
     starMaxSize: 3,
     starColor: [255, 255, 255],
   }, constants);
+
+  earth = new Earth(ctx, {
+    cx: constants.mainCenterX,
+    cy: constants.mainCenterY,
+    width: 6 * constants.mainRadius,
+    height: 6 * constants.mainRadius,
+  });
 
   for (let i = 0; i < 360; i += parseInt(360 / constants.nOfParticles)) {
     let center = Utils.getPointOnArc(
@@ -103,16 +112,7 @@ const update = function (frequencies) {
     particles[i].move(distance, intensity);
   }
 
-  const earthImg = document.getElementById('earth-img');
-  const earthImgWidth = 6 * constants.mainRadius;
-  const earthImgHeight = 6 * constants.mainRadius;
-  ctx.drawImage(
-    earthImg,
-    constants.mainCenterX - (earthImgWidth / 2),
-    constants.mainCenterY - (earthImgHeight / 2),
-    earthImgWidth,
-    earthImgHeight
-  );
+  earth.draw();
 };
 
 const audioConfig = new AudioConfig({
