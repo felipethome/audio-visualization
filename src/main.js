@@ -1,4 +1,4 @@
-import {get} from './Request';
+import AudioConfig from './AudioConfig';
 import Background from './Background';
 import Sky from './Sky';
 import Particle from './Particle';
@@ -9,9 +9,9 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const ctx = canvas.getContext('2d');
 
-const particles = [];
 let sky;
 let background;
+const particles = [];
 
 const constants = {
   // The number of buckets returned from the Fourier Transform.
@@ -42,29 +42,7 @@ const constants = {
   gravity: 1,
 };
 
-const audioCtx = new AudioContext();
-const sourceNode = audioCtx.createBufferSource();
-const analyser = audioCtx.createAnalyser();
-const javascriptNode = audioCtx.createScriptProcessor(2048, 1, 1);
-
-const loadAudioFromURL = function (url) {
-  return get(url, 'arraybuffer').then((response) => {
-    audioCtx.decodeAudioData(response, (buffer) => {
-      sourceNode.buffer = buffer;
-      sourceNode.start();
-    });
-  });
-};
-
 const setup = function () {
-  analyser.fftSize = constants.buckets * 2;
-  analyser.smoothingTimeConstant = 0.3;
-
-  sourceNode.connect(analyser);
-  analyser.connect(javascriptNode);
-  javascriptNode.connect(audioCtx.destination);
-  sourceNode.connect(audioCtx.destination);
-
   background = new Background(ctx, {
     color: [183, 28, 28],
   }, constants);
@@ -104,22 +82,6 @@ const accumulateFrequencies = function (frequencies, index) {
   return Utils.getAverage(frequencies, start, end);
 };
 
-/**
- * Remove too high and too low frequencies.
- * @param  {Uint8Array} frequencies Array of frequencies.
- * @return {Uint8Array}             Array of filtered frequencies.
- */
-const filterFrequencies = function (frequencies) {
-  const length = frequencies.length - 200;
-  const newFrequencies = new Uint8Array(length);
-
-  for (let i = 50; i < frequencies.length - 150; i++) {
-    newFrequencies[i - 50] = frequencies[i];
-  }
-
-  return newFrequencies;
-};
-
 const update = function (frequencies) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -151,12 +113,12 @@ const update = function (frequencies) {
   );
 };
 
-javascriptNode.onaudioprocess = () => {
-  const frequencies =  new Uint8Array(analyser.frequencyBinCount);
-  analyser.getByteFrequencyData(frequencies);
-  update(filterFrequencies(frequencies));
-};
+const audioConfig = new AudioConfig({
+  buckets: constants.buckets,
+  smoothingTimeConstant: 0.3,
+  bufferSize: 2048,
+}, update);
 
-loadAudioFromURL('audio/audiobinger-rise-and-shine.mp3').then(() => {
+audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(() => {
   setup();
 });

@@ -12,7 +12,7 @@ export default class AudioConfig {
     this.sourceNode = this.audioCtx.createBufferSource();
 
     // It will provide real time information about the audio frequencies.
-    this.analyserNode = this.audioCtx.createanalyserNode();
+    this.analyserNode = this.audioCtx.createAnalyser();
 
     // Whenever the buffer has bufferSize data served by the input data node
     // (in this case the analyser) the callback "onaudioprocess" is called.
