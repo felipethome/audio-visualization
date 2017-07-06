@@ -42,7 +42,7 @@ const constants = {
   gravity: 1,
 };
 
-const setup = function () {
+const init = function () {
   background = new Background(ctx, {
     color: [183, 28, 28],
   }, constants);
@@ -121,5 +121,5 @@ const audioConfig = new AudioConfig({
 }, update);
 
 audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(() => {
-  setup();
+  init();
 });
