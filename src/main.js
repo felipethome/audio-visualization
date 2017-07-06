@@ -50,6 +50,7 @@ const setup = function () {
   sky = new Sky(ctx, {
     nOfStars: 800,
     starMaxSize: 3,
+    starColor: [255, 255, 255],
   }, constants);
 
   for (let i = 0; i < 360; i += parseInt(360 / constants.nOfParticles)) {

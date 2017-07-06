@@ -6,6 +6,7 @@ export default class Sky {
 
     this.nOfStars = options.nOfStars;
     this.starMaxSize = options.starMaxSize;
+    this.starColor = options.starColor.slice();
 
     this.constants = Object.assign({}, constants);
 
@@ -15,8 +16,14 @@ export default class Sky {
       const x = Utils.getRandomInteger(this.constants.width);
       const y = Utils.getRandomInteger(this.constants.height);
       const size = Utils.getRandomInteger(this.starMaxSize);
-      const color = `rgba(255, 255, 255, ${Utils.getRandomInteger(10) / 10})`;
-      this.stars.push({x: x, y: y, size: size, color: color});
+      const color = this.starColor;
+      const opacity = Utils.getRandomInteger(10) / 10;
+      this.stars.push({
+        x: x,
+        y: y,
+        size: size,
+        color: `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity})`,
+      });
     }
   }
 
