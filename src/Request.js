@@ -1,4 +1,4 @@
-const _buildRequest = function (url, method, responseType, headers) {
+const buildRequest = function (url, method, responseType, headers) {
   const internalHeaders = headers || {};
 
   return new Promise((resolve, reject) => {
