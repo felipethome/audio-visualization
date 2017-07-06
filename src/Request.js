@@ -32,7 +32,7 @@ const get = function (url, responseType, headers) {
     console.error(`URL can't be ${url}.`);
   }
 
-  return _buildRequest(url, 'GET', responseType, headers);
+  return buildRequest(url, 'GET', responseType, headers);
 };
 
 export {get};
