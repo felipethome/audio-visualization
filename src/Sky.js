@@ -1,3 +1,7 @@
+/*
+ * The Sky painted on the canvas.
+ */
+
 import Utils from './Utils';
 
 export default class Sky {
@@ -6,8 +10,11 @@ export default class Sky {
 
     this.nOfStars = options.nOfStars;
     this.starMaxSize = options.starMaxSize;
+
+    // Shallow copy the star color.
     this.starColor = options.starColor.slice();
 
+    // Shallow copy the constants.
     this.constants = Object.assign({}, constants);
 
     this.stars = [];

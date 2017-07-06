@@ -4,25 +4,17 @@ import Sky from './Sky';
 import Particle from './Particle';
 import Utils from './Utils';
 
-const canvas = document.getElementById('canvas');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const ctx = canvas.getContext('2d');
-
-let sky;
-let background;
-const particles = [];
-
 const constants = {
   // The number of buckets returned from the Fourier Transform.
   buckets: 512,
 
-  width: canvas.width,
-  height: canvas.height,
+  // The canvas dimensions.
+  width: window.innerWidth,
+  height: window.innerHeight,
 
   // The minimum radius of the particles.
   particleRadius: 15,
-  // The closest distance the particles will be relative to the center.
+  // The closest distance the particles can get to the center.
   particleDistance: 160,
   // Number of particles. For better results choose a divisor of 360.
   nOfParticles: 30,
@@ -33,14 +25,23 @@ const constants = {
   // The center of the canvas. I want the constants to be "flat" so it can
   // easily be cloned. That is why this is not an object with shape
   // {x: Number, y: Number}.
-  mainCenterX: Math.ceil(canvas.width / 2),
-  mainCenterY: Math.ceil(canvas.height / 2),
+  mainCenterX: Math.ceil(window.innerWidth / 2),
+  mainCenterY: Math.ceil(window.innerHeight / 2),
 
   // The maximum distance the particles can get from their initial point.
   maxDistance: 100,
 
   gravity: 1,
 };
+
+const canvas = document.getElementById('canvas');
+canvas.width = constants.width;
+canvas.height = constants.height;
+const ctx = canvas.getContext('2d');
+
+let sky;
+let background;
+const particles = [];
 
 const init = function () {
   background = new Background(ctx, {

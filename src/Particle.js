@@ -1,3 +1,11 @@
+/*
+ * A particle is the object that floats around the earth. They can fall towards
+ * the center in which case a gravity constant is used to increase the falling
+ * velocity, or they can launch towards the canvas border. The direction they
+ * move is defined by a direction vector. We use the vector form of the
+ * equation of a line to calculate the next position of the particle.
+ */
+
 import Utils from './Utils';
 
 export default class Particle {
@@ -59,7 +67,7 @@ export default class Particle {
   }
 
   fall() {
-    // S = Si + (Vi * t) + (0.5 * at^2). Since t = 1 for consecutive frames,
+    // S = Si + (Vi * t) + (0.5 * a * t^2). Since t = 1 for consecutive frames,
     // Vi is our previous velocity and Si is our previous position then gravity
     // becomes just the addition/subtraction of a constant.
     this.fallVelocity += this.constants.gravity;

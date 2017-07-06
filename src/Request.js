@@ -1,3 +1,7 @@
+/*
+ * Helper functions to build XMLHttpRequests using Promises.
+ */
+
 const buildRequest = function (url, method, responseType, headers) {
   const internalHeaders = headers || {};
 
