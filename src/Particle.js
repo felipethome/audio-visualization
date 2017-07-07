@@ -62,7 +62,7 @@ export default class Particle {
     // Otherwise launch it to the arrival point.
     else {
       this.wasLanching = true;
-      this.launch(intensity);
+      this.launch(this.intensity);
     }
   }
 
