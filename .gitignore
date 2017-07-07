@@ -1,6 +1,6 @@
 *.log
 node_modules
 filed
-build
 dist
-lib
+build/*
+!build/index.html
