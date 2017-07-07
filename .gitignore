@@ -1,5 +1,6 @@
 *.log
 node_modules
+filed
 build
 dist
 lib
