@@ -10,11 +10,20 @@ export default class Utils {
 
   static getRandomColor = function (opacity = 1) {
     const colors = [
+      // Dark red.
       `rgba(183, 28, 28, ${opacity})`,
+      // Dark pink.
       `rgba(136, 14, 79, ${opacity})`,
-      `rgba(26, 35, 126, ${opacity})`,
-      `rgba(13, 71, 161, ${opacity})`,
-      `rgba(24, 94, 32, ${opacity})`,
+      // Dark orange.
+      `rgba(230, 81, 0, ${opacity})`,
+      // Dark dark orange.
+      `rgba(191, 54, 12, ${opacity})`,
+
+      // Cold colors like blue and green.
+      // `rgba(27, 94, 32, ${opacity})`,
+      // `rgba(13, 71, 161, ${opacity})`,
+      // `rgba(26, 35, 126, ${opacity})`,
+      // `rgba(24, 94, 32, ${opacity})`,
     ];
 
     return Utils.getRandomElement(colors);

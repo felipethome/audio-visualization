@@ -87,7 +87,7 @@ export default class Particle {
 
   draw() {
     const {ctx, current, radius, intensity, constants} = this;
-    const color = Utils.getRandomColor(0.5);
+    const color = Utils.getRandomColor(0.6);
 
     // Draw the line connecting the particles to the canvas center.
     ctx.save();
