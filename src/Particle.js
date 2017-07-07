@@ -113,15 +113,15 @@ export default class Particle {
     ctx.fill();
 
     // Draw the particle/image. Its size is a linear function of the intensity.
-    const spotifyImg = document.getElementById('spotify-img');
-    const spotifyImgWidth = radius * 2;
-    const spotifyImgHeight = radius * 2;
+    const img = document.getElementById('particle-img');
+    const imgWidth = radius * 2;
+    const imgHeight = radius * 2;
     ctx.drawImage(
-      spotifyImg,
-      current.x - (spotifyImgWidth / 2),
-      current.y - (spotifyImgHeight / 2),
-      spotifyImgWidth + (2.2 * intensity),
-      spotifyImgHeight + (2.2 * intensity)
+      img,
+      current.x - (imgWidth / 2),
+      current.y - (imgHeight / 2),
+      imgWidth + (2.2 * intensity),
+      imgHeight + (2.2 * intensity)
     );
   }
 }
