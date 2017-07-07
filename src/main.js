@@ -98,7 +98,7 @@ const update = function (frequencies) {
 
   const average = Utils.getAverage(frequencies);
   // Frequencies are in the interval 0..256 (so it's their average).
-  // Remap them to the interval 0..10.
+  // Remap tha average to the interval 0..10.
   const intensity = Utils.remapNumber(average, {max: 256}, {max: 10});
 
   background.draw(intensity);
