@@ -121,6 +121,6 @@ const audioConfig = new AudioConfig({
   bufferSize: 2048,
 }, update);
 
-audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(() => {
+audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.ogg').then(() => {
   init();
 });
