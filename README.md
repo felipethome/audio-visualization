@@ -1,6 +1,6 @@
 # Audio Visualization
 
-## The idea behind this animation?
+## The idea behind this animation
 
 The idea is to show the music going on around the Earth. If the music is "louder" then the music notes are further away. The Earth keeps always atracting the music to itself with its gravity.
 
@@ -13,7 +13,7 @@ The spheres come back to their original point because of the implemented gravity
 This animation uses the Web Audio API and HTML5 canvas element.
 The code uses ES6, but it is transpiled using Babel. This means that not so up to date browsers can execute this animation, though I didn't test it, so I recommend an up to date Chrome or Firefox to visualize it (mobile versions are okay too).
 
-## How to try it?
+## How can I try it?
 
 Clone this repo:
 
