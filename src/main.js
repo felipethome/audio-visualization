@@ -1,4 +1,5 @@
 import AudioConfig from './AudioConfig';
+import BrowserDetection from './BrowserDetection';
 import Background from './Background';
 import Sky from './Sky';
 import Earth from './Earth';
@@ -121,6 +122,16 @@ const audioConfig = new AudioConfig({
   bufferSize: 2048,
 }, update);
 
-audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.ogg').then(() => {
-  init();
-});
+// Safari has a buggy implementation of the decodeAudioData function. Because
+// of that you need to supply a raw mp3 file without cover art if you want it
+// to execute this animation.
+if (BrowserDetection.isSafari(navigator.userAgent)) {
+  audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(() => {
+    init();
+  });
+}
+else {
+  audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.ogg').then(() => {
+    init();
+  });
+}

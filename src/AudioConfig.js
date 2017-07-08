@@ -13,6 +13,8 @@ import {get} from './Request';
 
 export default class AudioConfig {
   constructor(options, callback) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+
     // Fourier Transform options.
     this.buckets = options.buckets;
     this.smoothingTimeConstant = options.smoothingTimeConstant;
