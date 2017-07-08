@@ -53,8 +53,7 @@ const init = function () {
 
   sky = new Sky(ctx, {
     nOfStars: 800,
-    starMaxSize: 3,
-    starColor: [255, 255, 255],
+    starMaxSize: 6,
   }, constants);
 
   earth = new Earth(ctx, {
