@@ -10,8 +10,17 @@ The spheres come back to their original point because of the implemented gravity
 
 ## What does this animation uses?
 
-This animation uses the Web Audio API and HTML5 canvas element.
-The code uses ES6, but it is transpiled using Babel. This means that not so up to date browsers can execute this animation, though I didn't test it, so I recommend an up to date Chrome or Firefox to visualize it (mobile versions are okay too).
+This animation uses the Web Audio API and HTML canvas element.
+The code uses ES6, but it is transpiled using Babel.
+
+## Compatibility
+
+Up to date Chrome, Firefox or Edge will definitely work.
+Up to date Safari (Webkit) will work, but their decodeAudioData function is buggy, so I do not guarantee that.
+Internet Explorer: No.
+
+[Web Audio API compatibility table](https://caniuse.com/#search=web%20audio%20api)
+[Canvas compatibility table](https://caniuse.com/#search=canvas)
 
 ## How can I try it?
 
