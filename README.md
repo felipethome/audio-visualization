@@ -38,7 +38,7 @@ For a development version:
 
 Then check localhost:8889.
 
-For a production version (minimized and compiled with NODE_ENV setted to "production"):
+For a production version:
 
     npm run deploy
 
