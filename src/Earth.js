@@ -15,13 +15,6 @@ export default class Earth {
   draw() {
     const {ctx, x, y, width, height} = this;
     const earthImg = document.getElementById('earth-img');
-
-    ctx.drawImage(
-      earthImg,
-      x,
-      y,
-      width,
-      height
-    );
+    ctx.drawImage(earthImg, x, y, width, height);
   }
 }
