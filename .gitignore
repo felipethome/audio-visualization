@@ -4,3 +4,4 @@ filed
 dist
 build/*
 !build/index.html
+!build/favicons
