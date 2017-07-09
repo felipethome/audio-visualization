@@ -88,6 +88,7 @@ const init = function () {
   setup();
   throttle('resize', 'optimizedResize');
   window.addEventListener('optimizedResize', setup);
+  document.getElementById('progress').style.display = 'none';
 };
 
 const accumulateFrequencies = function (frequencies, index) {
