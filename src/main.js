@@ -5,48 +5,48 @@ import Sky from './Sky';
 import Earth from './Earth';
 import Particle from './Particle';
 import Utils from './Utils';
-
-const constants = {
-  // The number of buckets returned from the Fourier Transform.
-  buckets: 512,
-
-  // The canvas dimensions.
-  width: window.innerWidth,
-  height: window.innerHeight,
-
-  // The minimum radius of the particles.
-  particleRadius: 15,
-  // The closest distance the particles can get to the center.
-  particleDistance: 160,
-  // Number of particles. For better results choose a divisor of 360.
-  nOfParticles: 30,
-
-  // The radius of the Earth image.
-  mainRadius: 50,
-
-  // The center of the canvas. I want the constants to be "flat" so it can
-  // easily be cloned. That is why this is not an object with shape
-  // {x: Number, y: Number}.
-  mainCenterX: Math.ceil(window.innerWidth / 2),
-  mainCenterY: Math.ceil(window.innerHeight / 2),
-
-  // The maximum distance the particles can get from their initial point.
-  maxDistance: 100,
-
-  gravity: 1,
-};
+import throttle from './throttle';
 
 const canvas = document.getElementById('canvas');
-canvas.width = constants.width;
-canvas.height = constants.height;
 const ctx = canvas.getContext('2d');
 
 let sky;
 let background;
 let earth;
-const particles = [];
+let particles;
+let constants;
 
-const init = function () {
+const setup = function () {
+  constants = {
+    // The canvas dimensions.
+    width: window.innerWidth,
+    height: window.innerHeight,
+
+    // The minimum radius of the particles.
+    particleRadius: 15,
+    // The closest distance the particles can get to the center.
+    particleDistance: 160,
+    // Number of particles. For better results choose a divisor of 360.
+    nOfParticles: 30,
+
+    // The radius of the Earth image.
+    mainRadius: 50,
+
+    // The center of the canvas. I want the constants to be "flat" so it can
+    // easily be cloned. That is why this is not an object with shape
+    // {x: Number, y: Number}.
+    mainCenterX: Math.ceil(window.innerWidth / 2),
+    mainCenterY: Math.ceil(window.innerHeight / 2),
+
+    // The maximum distance the particles can get from their initial point.
+    maxDistance: 100,
+
+    gravity: 1,
+  };
+
+  canvas.width = constants.width;
+  canvas.height = constants.height;
+
   background = new Background(ctx, {
     color: [183, 28, 28],
   }, constants);
@@ -62,6 +62,8 @@ const init = function () {
     width: 6 * constants.mainRadius,
     height: 6 * constants.mainRadius,
   });
+
+  particles = [];
 
   for (let i = 0; i < 360; i += parseInt(360 / constants.nOfParticles)) {
     let center = Utils.getPointOnArc(
@@ -80,6 +82,12 @@ const init = function () {
       vy: center.y - constants.mainCenterY,
     }, constants));
   }
+};
+
+const init = function () {
+  setup();
+  throttle('resize', 'optimizedResize');
+  window.addEventListener('optimizedResize', setup);
 };
 
 const accumulateFrequencies = function (frequencies, index) {
@@ -116,7 +124,7 @@ const update = function (frequencies) {
 };
 
 const audioConfig = new AudioConfig({
-  buckets: constants.buckets,
+  buckets: 512,
   smoothingTimeConstant: 0.3,
   bufferSize: 2048,
 }, update);
@@ -125,12 +133,8 @@ const audioConfig = new AudioConfig({
 // of that you need to supply a raw mp3 file without cover art if you want it
 // to execute this animation.
 if (BrowserDetection.isSafari(navigator.userAgent)) {
-  audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(() => {
-    init();
-  });
+  audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(init);
 }
 else {
-  audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.ogg').then(() => {
-    init();
-  });
+  audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.ogg').then(init);
 }
