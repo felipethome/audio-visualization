@@ -10,6 +10,8 @@ import throttle from './throttle';
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+let audioConfig;
+
 let sky;
 let background;
 let earth;
@@ -24,22 +26,21 @@ const setup = function () {
 
     // The minimum radius of the particles.
     particleRadius: 15,
-    // The closest distance the particles can get to the center.
-    particleDistance: 160,
+    // The closest distance the particles can get to the border of the Earth.
+    particleDistance: 60,
+    // The maximum distance the particles can get from their initial point.
+    particleMaxDistance: 100,
     // Number of particles. For better results choose a divisor of 360.
     nOfParticles: 30,
 
     // The radius of the Earth image.
-    mainRadius: 50,
+    mainRadius: 150,
 
     // The center of the canvas. I want the constants to be "flat" so it can
     // easily be cloned. That is why this is not an object with shape
     // {x: Number, y: Number}.
     mainCenterX: Math.ceil(window.innerWidth / 2),
     mainCenterY: Math.ceil(window.innerHeight / 2),
-
-    // The maximum distance the particles can get from their initial point.
-    maxDistance: 100,
 
     gravity: 1,
   };
@@ -59,8 +60,8 @@ const setup = function () {
   earth = new Earth(ctx, {
     cx: constants.mainCenterX,
     cy: constants.mainCenterY,
-    width: 6 * constants.mainRadius,
-    height: 6 * constants.mainRadius,
+    width: 2 * constants.mainRadius,
+    height: 2 * constants.mainRadius,
   });
 
   particles = [];
@@ -86,9 +87,13 @@ const setup = function () {
 
 const init = function () {
   setup();
+
+  // Add a throttled resize event.
   throttle('resize', 'optimizedResize');
   window.addEventListener('optimizedResize', setup);
-  document.getElementById('progress').style.display = 'none';
+
+  // Hide the progress indicator.
+  document.getElementById('progress').classList.toggle('hidden');
 };
 
 const accumulateFrequencies = function (frequencies, index) {
@@ -116,7 +121,7 @@ const update = function (frequencies) {
   for (let i = 0; i < particles.length; i++) {
     const frequency = accumulateFrequencies(frequencies, i);
     const distance = Utils.remapNumber(
-      frequency, {max: 256}, {max: constants.maxDistance}
+      frequency, {max: 256}, {max: constants.particleMaxDistance}
     );
     particles[i].move(distance, intensity);
   }
@@ -124,18 +129,25 @@ const update = function (frequencies) {
   earth.draw();
 };
 
-const audioConfig = new AudioConfig({
-  buckets: 512,
-  smoothingTimeConstant: 0.3,
-  bufferSize: 2048,
-}, update);
+document.getElementById('play-button').addEventListener('click', (event) => {
+  // Hide the play button.
+  event.currentTarget.classList.toggle('hidden');
+  // Show the progress indicator.
+  document.getElementById('progress').classList.toggle('hidden');
 
-// Safari has a buggy implementation of the decodeAudioData function. Because
-// of that you need to supply a raw mp3 file without cover art if you want it
-// to execute this animation.
-if (BrowserDetection.isSafari(navigator.userAgent)) {
-  audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(init);
-}
-else {
-  audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.ogg').then(init);
-}
+  audioConfig = new AudioConfig({
+    buckets: 512,
+    smoothingTimeConstant: 0.3,
+    bufferSize: 2048,
+  }, update);
+
+  // Safari has a buggy implementation of the decodeAudioData function. Because
+  // of that you need to supply a raw mp3 file without cover art if you want it
+  // to execute this animation.
+  if (BrowserDetection.isSafari(navigator.userAgent)) {
+    audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(init);
+  }
+  else {
+    audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.ogg').then(init);
+  }
+});

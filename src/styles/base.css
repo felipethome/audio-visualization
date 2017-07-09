@@ -11,15 +11,10 @@ html, body {
   background: #000;
 }
 
-.img {
-  display: none;
-}
-
-.progress {
+.element-container {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,16 +25,27 @@ html, body {
 .progress-text {
   color: #FAFAFA;
   font-size: 1em;
-  animation: progressanim 2000ms ease-in-out infinite alternate;
+  animation: progressing 2000ms ease-in-out infinite alternate;
 }
 
-@keyframes progressanim {
+@keyframes progressing {
   0% {
     opacity: 1;
   }
   100% {
     opacity: 0;
   }
+}
+
+.play-button {
+  fill: #CCC;
+  width: 125px;
+  height: 125px;
+  cursor: pointer;
+}
+
+.play-button:hover {
+  fill: #FAFAFA;
 }
 
 .footer {
@@ -67,4 +73,8 @@ html, body {
 .footer-content a:active,
 .footer-content a:visited {
   color: #AAA;
+}
+
+.hidden {
+  display: none;
 }

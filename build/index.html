@@ -17,19 +17,28 @@
   <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
-  <img id="earth-img" src="img/nasa-earth-scaled.png" class="img">
-  <img id="particle-img" src="img/particle.png" class="img">
-  <img id="star-opacity-9-img" src="img/star-opacity-9.png" class="img">
-  <img id="star-opacity-8-img" src="img/star-opacity-8.png" class="img">
-  <img id="star-opacity-7-img" src="img/star-opacity-7.png" class="img">
-  <img id="star-opacity-6-img" src="img/star-opacity-6.png" class="img">
-  <img id="star-opacity-5-img" src="img/star-opacity-5.png" class="img">
+  <img id="earth-img" src="img/nasa-earth-scaled.png" class="hidden">
+  <img id="particle-img" src="img/particle.png" class="hidden">
+  <img id="star-opacity-9-img" src="img/star-opacity-9.png" class="hidden">
+  <img id="star-opacity-8-img" src="img/star-opacity-8.png" class="hidden">
+  <img id="star-opacity-7-img" src="img/star-opacity-7.png" class="hidden">
+  <img id="star-opacity-6-img" src="img/star-opacity-6.png" class="hidden">
+  <img id="star-opacity-5-img" src="img/star-opacity-5.png" class="hidden">
 
   <div id="container" class="container">
-    <div id="progress" class="progress">
+    <div id="progress" class="element-container hidden">
       <div class="progress-text">Loading</div>
     </div>
+
+    <div id="play-button" class="element-container">
+      <svg class="play-button" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+      </svg>
+    </div>
+
     <canvas id="canvas"></canvas>
+
     <div class="footer">
       <div class="footer-content">
         Animation created by <a href="https://github.com/felipethome">Felipe Thomé</a><br>
