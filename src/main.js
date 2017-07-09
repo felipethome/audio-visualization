@@ -112,14 +112,19 @@ const update = function (frequencies) {
 
   const average = Utils.getAverage(frequencies);
   // Frequencies are in the interval 0..256 (so it's their average).
-  // Remap tha average to the interval 0..10.
+  // Remap the average to the interval 0..10. The intensity value will be used
+  // in several places in the animation that need to change based on the
+  // sound intensity.
   const intensity = Utils.remapNumber(average, {max: 256}, {max: 10});
 
   background.draw(intensity);
   sky.draw();
 
   for (let i = 0; i < particles.length; i++) {
+    // Frequencies need to be accumulated because not necessarily you have the
+    // same number of frequencies as the number of particles.
     const frequency = accumulateFrequencies(frequencies, i);
+    // Remap the frequency to the 0..particleMaxDistance interval.
     const distance = Utils.remapNumber(
       frequency, {max: 256}, {max: constants.particleMaxDistance}
     );
@@ -142,8 +147,8 @@ document.getElementById('play-button').addEventListener('click', (event) => {
   }, update);
 
   // Safari has a buggy implementation of the decodeAudioData function. Because
-  // of that you need to supply a raw mp3 file without cover art if you want it
-  // to execute this animation.
+  // of that you need to supply a mp3 file without cover art if you want it to
+  // execute this animation.
   if (BrowserDetection.isSafari(navigator.userAgent)) {
     audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(init);
   }
