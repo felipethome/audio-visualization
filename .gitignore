@@ -1,9 +1,0 @@
-*.log
-node_modules
-filed
-dist
-build/*
-!build/index.html
-!build/favicons
-!build/audio
-!build/img
