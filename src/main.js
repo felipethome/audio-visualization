@@ -154,7 +154,8 @@ document.getElementById('play-button').addEventListener('click', (event) => {
   // Safari has a buggy implementation of the decodeAudioData function. Because
   // of that you need to supply a mp3 file without cover art if you want it to
   // execute this animation.
-  if (BrowserDetection.isSafari(navigator.userAgent)) {
+  if (BrowserDetection.isSafari(navigator.userAgent) ||
+      BrowserDetection.isEdge(navigator.userAgent)) {
     audioConfig.loadFromURL(
       'audio/audiobinger-rise-and-shine.mp3', updateLoadingProgress
     ).then(init);

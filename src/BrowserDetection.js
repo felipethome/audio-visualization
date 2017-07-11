@@ -8,4 +8,8 @@ export default class BrowserDetection {
       userAgent.indexOf('Chrome') === -1 &&
       userAgent.indexOf('Chromium') === -1;
   }
+
+  static isEdge(userAgent) {
+    return userAgent.indexOf('Edge/') !== -1;
+  }
 }
