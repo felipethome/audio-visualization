@@ -134,6 +134,10 @@ const update = function (frequencies) {
   earth.draw();
 };
 
+const updateLoadingProgress = function (percentage) {
+  document.getElementById('progress').innerHTML = `${parseInt(percentage)}%`;
+};
+
 document.getElementById('play-button').addEventListener('click', (event) => {
   // Hide the play button.
   event.currentTarget.classList.toggle('hidden');
@@ -150,9 +154,13 @@ document.getElementById('play-button').addEventListener('click', (event) => {
   // of that you need to supply a mp3 file without cover art if you want it to
   // execute this animation.
   if (BrowserDetection.isSafari(navigator.userAgent)) {
-    audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.mp3').then(init);
+    audioConfig.loadFromURL(
+      'audio/audiobinger-rise-and-shine.mp3', updateLoadingProgress
+    ).then(init);
   }
   else {
-    audioConfig.loadFromURL('audio/audiobinger-rise-and-shine.ogg').then(init);
+    audioConfig.loadFromURL(
+      'audio/audiobinger-rise-and-shine.ogg', updateLoadingProgress
+    ).then(init);
   }
 });

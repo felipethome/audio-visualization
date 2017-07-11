@@ -73,8 +73,8 @@ export default class AudioConfig {
     return newFrequencies;
   }
 
-  loadFromURL(audioURL) {
-    return get(audioURL, 'arraybuffer').then((response) => {
+  loadFromURL(audioURL, progressCb) {
+    return get(audioURL, 'arraybuffer', {}, progressCb).then((response) => {
       this.audioCtx.decodeAudioData(response, (buffer) => {
         this.setup(buffer);
       });

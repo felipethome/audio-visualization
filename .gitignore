@@ -2,6 +2,7 @@
 node_modules
 filed
 dist
+.publish
 build/*
 !build/index.html
 !build/favicons
