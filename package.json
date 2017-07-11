@@ -33,6 +33,7 @@
   "scripts": {
     "lint": "eslint src/*",
     "dev": "gulp",
-    "deploy": "gulp deploy"
+    "deploy": "gulp deploy",
+    "ghpages": "gulp ghpages"
   }
 }
