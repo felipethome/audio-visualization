@@ -8,6 +8,8 @@ The frequencies of the audio are captured in real time. Each frequency correspon
 
 The spheres come back to their original point because of the implemented gravity.
 
+[Demo](http://felipethome.github.io/audio-visualization)
+
 ## What does this animation uses?
 
 This animation uses the Web Audio API and HTML canvas element.
