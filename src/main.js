@@ -135,7 +135,8 @@ const update = function (frequencies) {
 };
 
 const updateLoadingProgress = function (percentage) {
-  document.getElementById('progress').innerHTML = `${parseInt(percentage)}%`;
+  document.getElementById('progress-text').innerHTML =
+    `${parseInt(percentage)}%`;
 };
 
 document.getElementById('play-button').addEventListener('click', (event) => {

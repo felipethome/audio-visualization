@@ -14,7 +14,7 @@ const buildRequest = function (url, method, responseType, headers, progressCb) {
 
     req.onprogress = (event) => {
       if (event.lengthComputable) {
-        const percentage = event.loaded / event.total;
+        const percentage = (event.loaded / event.total) * 100;
         if (progressCb) progressCb(percentage);
       }
       else {

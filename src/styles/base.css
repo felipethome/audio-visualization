@@ -25,16 +25,6 @@ html, body {
 .progress-text {
   color: #FAFAFA;
   font-size: 1em;
-  animation: progressing 2000ms ease-in-out infinite alternate;
-}
-
-@keyframes progressing {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }
 
 .play-button {
