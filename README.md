@@ -17,8 +17,8 @@ The code uses ES6, but it is transpiled using Babel.
 
 ## Compatibility
 
-Up to date Chrome, Firefox or Edge will definitely work.  
-Up to date Safari (Webkit) will work, but their decodeAudioData function is buggy, so I do not guarantee that.  
+Up to date Chrome and Firefox will definitely work.  
+Up to date Safari and Edge will work, but their decodeAudioData function is buggy, so I do not guarantee that.  
 Internet Explorer: No.  
 
 [Web Audio API compatibility table](https://caniuse.com/#search=web%20audio%20api)  
