@@ -9,6 +9,7 @@ var concat = require('gulp-concat');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
+var ghPages = require('gulp-gh-pages');
 var source = require('vinyl-source-stream');
 var streamify = require('gulp-streamify');
 var uglify = require('gulp-uglify');
@@ -100,6 +101,11 @@ var cssTask = function (options) {
       console.log('CSS bundle built in ' + (Date.now() - start) + 'ms');
     }));
 };
+
+gulp.task('ghpages', ['deploy'], function () {
+  return gulp.src('./build/**/*')
+    .pipe(ghPages());
+});
 
 gulp.task('deploy', function () {
   process.env.NODE_ENV = 'production';
