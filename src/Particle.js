@@ -12,7 +12,7 @@ export default class Particle {
   constructor(ctx, options, constants) {
     this.ctx = ctx;
 
-    // This variables will not change throughout the particle's life cycle. So
+    // These variables will not change throughout the particle's life cycle. So
     // cx and cy will always be the initial position.
     this.angle = options.angle;
     this.cx = options.cx;
@@ -26,7 +26,7 @@ export default class Particle {
     const magnitude = Math.sqrt(options.vx ** 2 + options.vy ** 2);
     this.direction = {x: options.vx / magnitude, y: options.vy / magnitude};
 
-    // This are the positions of the particle. The "current" object represents
+    // These are the positions of the particle. The "current" object represents
     // current position and the "arrival" object represents which position
     // the particle must get during the "launching" execution.
     this.arrival = {x: options.cx, y: options.cy};
