@@ -6,8 +6,6 @@ The idea of the animation is to show the music going on around the Earth. If the
 
 The frequencies of the audio are captured in real time. Each group of frequencies corresponds to one floating sphere. The size of the spheres are related to the average of all frequencies. If the average is a big number so the spheres will be big too. Same thing goes for the speed they move away: the greater the average the greater the speed.
 
-The spheres come back to their original point because of the implemented gravity.
-
 [Demo](https://felipethome.github.io/audio-visualization)
 
 ## What does this animation uses?
