@@ -1,10 +1,10 @@
 # Audio Visualization
 
-## The idea behind this animation
+Simple animation using the WebAudio API and Canvas.
 
-The idea is to show the music going on around the Earth. If the music is "louder" then the music notes are further away. The Earth keeps attracting the music to itself with its gravity. Each sphere around the Earth represents a group of frequencies.
+The idea of the animation is to show the music going on around the Earth. If the music is "louder" then the music notes are further away. The Earth keeps attracting the music to itself with its gravity. Each sphere around the Earth represents a group of frequencies.
 
-The frequencies of the audio are captured in real time. Each group of frequencies corresponds to one floating sphere. Higher the frequency further these spheres will be from the canvas center. The size of the spheres are related to the average of all frequencies. If the average is a big number so the spheres will be big too. Same thing for the velocity they move away: larger the average higher the speed.
+The frequencies of the audio are captured in real time. Each group of frequencies corresponds to one floating sphere. The size of the spheres are related to the average of all frequencies. If the average is a big number so the spheres will be big too. Same thing goes for the speed they move away: the greater the average the greater the speed.
 
 The spheres come back to their original point because of the implemented gravity.
 
@@ -13,7 +13,7 @@ The spheres come back to their original point because of the implemented gravity
 ## What does this animation uses?
 
 This animation uses the Web Audio API and HTML canvas element.
-The code uses ES6, but it is transpiled using Babel.
+The code uses ES6+, but it is transpiled using Babel.
 
 ## Compatibility
 
