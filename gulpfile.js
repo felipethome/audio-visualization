@@ -1,21 +1,21 @@
-/* eslint-disable no-console, no-var, prefer-arrow-callback, prefer-template */
+/* eslint-disable no-console */
 
-var browserify = require('browserify');
-var connect = require('gulp-connect');
-var cssmin = require('gulp-cssmin');
-var merge = require('merge-stream');
-var notify = require('gulp-notify');
-var concat = require('gulp-concat');
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var gutil = require('gulp-util');
-var ghPages = require('gulp-gh-pages');
-var source = require('vinyl-source-stream');
-var streamify = require('gulp-streamify');
-var uglify = require('gulp-uglify');
-var watchify = require('watchify');
+const browserify = require('browserify');
+const connect = require('gulp-connect');
+const cssmin = require('gulp-cssmin');
+const merge = require('merge-stream');
+const notify = require('gulp-notify');
+const concat = require('gulp-concat');
+const gulp = require('gulp');
+const gulpif = require('gulp-if');
+const gutil = require('gulp-util');
+const ghPages = require('gulp-gh-pages');
+const source = require('vinyl-source-stream');
+const streamify = require('gulp-streamify');
+const uglify = require('gulp-uglify');
+const watchify = require('watchify');
 
-var files = {
+const files = {
   dependencies: [],
 
   browserify: [
@@ -27,8 +27,8 @@ var files = {
   ],
 };
 
-var browserifyTask = function (options) {
-  var bundler = browserify({
+const browserifyTask = function (options) {
+  let bundler = browserify({
     entries: [options.src],
     transform: [
       ['babelify', {
@@ -43,8 +43,8 @@ var browserifyTask = function (options) {
     extensions: ['.js', '.json'],
   });
 
-  var rebundle = function () {
-    var start = Date.now();
+  const rebundle = function () {
+    const start = Date.now();
     console.log('Building APP bundle');
     return bundler
       .bundle()
@@ -54,8 +54,8 @@ var browserifyTask = function (options) {
       .on('error', gutil.log)
       .pipe(gulp.dest(options.dest))
       .pipe(gulpif(options.development, connect.reload()))
-      .pipe(notify(function () {
-        console.log('APP bundle built in ' + (Date.now() - start) + 'ms');
+      .pipe(notify(() => {
+        console.log(`APP bundle built in ${Date.now() - start}ms`);
       }));
   };
 
@@ -69,13 +69,13 @@ var browserifyTask = function (options) {
   return rebundle();
 };
 
-var browserifyDepsTask = function (options) {
-  var vendorsBundler = browserify({
+const browserifyDepsTask = function (options) {
+  const vendorsBundler = browserify({
     debug: options.development,
     require: files.dependencies,
   });
 
-  var start = new Date();
+  const start = new Date();
   console.log('Building VENDORS bundle');
   return vendorsBundler
     .bundle()
@@ -84,47 +84,47 @@ var browserifyDepsTask = function (options) {
     .pipe(gulpif(!options.development, streamify(uglify())))
     .on('error', gutil.log)
     .pipe(gulp.dest(options.dest))
-    .pipe(notify(function () {
-      console.log('VENDORS bundle built in ' + (Date.now() - start) + 'ms');
+    .pipe(notify(() => {
+      console.log(`VENDORS bundle built in ${Date.now() - start}ms`);
     }));
 };
 
-var cssTask = function (options) {
-  var start = new Date();
+const cssTask = function (options) {
+  const start = new Date();
   console.log('Building CSS bundle');
   return gulp.src(options.src)
     .pipe(concat(options.output))
     .pipe(gulpif(!options.development, cssmin()))
     .pipe(gulp.dest(options.dest))
     .pipe(gulpif(options.development, connect.reload()))
-    .pipe(notify(function () {
-      console.log('CSS bundle built in ' + (Date.now() - start) + 'ms');
+    .pipe(notify(() => {
+      console.log(`CSS bundle built in ${Date.now() - start}ms`);
     }));
 };
 
-gulp.task('ghpages', ['deploy'], function () {
+gulp.task('ghpages', ['deploy'], () => {
   return gulp.src('./build/**/*')
     .pipe(ghPages());
 });
 
-gulp.task('deploy', function () {
+gulp.task('deploy', () => {
   process.env.NODE_ENV = 'production';
 
-  var browserifyDepsOpt = {
+  const browserifyDepsOpt = {
     development: false,
     src: files.dependencies,
     output: 'vendors.js',
     dest: './build/scripts',
   };
 
-  var browserifyOpt = {
+  const browserifyOpt = {
     development: false,
     src: files.browserify,
     output: 'bundle.js',
     dest: './build/scripts',
   };
 
-  var cssOpt = {
+  const cssOpt = {
     development: false,
     src: files.css,
     output: 'styles.css',
@@ -138,43 +138,41 @@ gulp.task('deploy', function () {
   );
 });
 
-gulp.task('default', function () {
+gulp.task('default', () => {
   process.env.NODE_ENV = 'development';
 
-  var browserifyDepsOpt = {
+  const browserifyDepsOpt = {
     development: true,
     src: files.dependencies,
     output: 'vendors.js',
     dest: './build/scripts',
   };
 
-  var browserifyOpt = {
+  const browserifyOpt = {
     development: true,
     src: files.browserify,
     output: 'bundle.js',
     dest: './build/scripts',
   };
 
-  var cssOpt = {
+  const cssOpt = {
     development: true,
     src: files.css,
     output: 'styles.css',
     dest: './build/styles',
   };
 
-  var serverOpt = {
+  const serverOpt = {
     root: './build',
-    port: 8889,
+    port: 8080,
     livereload: true,
   };
 
   connect.server(serverOpt);
 
-  gulp.watch(files.css,
-    function () {
-      cssTask(cssOpt);
-    }
-  );
+  gulp.watch(files.css, () => {
+    cssTask(cssOpt);
+  });
 
   return merge(
     browserifyDepsTask(browserifyDepsOpt),
