@@ -38,11 +38,7 @@ For a development version:
 
     npm run dev
 
-Then check localhost:8889.
-
-For a production version:
-
-    npm run deploy
+Then check localhost:8080.
 
 ## LICENSE
 
