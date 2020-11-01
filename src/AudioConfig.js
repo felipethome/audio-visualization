@@ -1,5 +1,5 @@
 /*
- * The main tasks of the objects of this class is to configure the audio
+ * The objects of this class configure the audio
  * routing graph, retrieve the audio frequencies, filter these frequencies
  * and pass them to a user callback. This callback is called at a rate
  * specified by the user.
