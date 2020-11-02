@@ -1,12 +1,11 @@
 /*
- * The main tasks of the objects of this class is to configure the audio
- * routing graph, retrieve the audio frequencies, filter these frequencies
- * and pass them to a user callback. This callback is called at a rate
- * specified by the user.
+ * Instances of this class configure the audio routing graph, retrieve the audio
+ * frequencies, filter these frequencies and pass them to a user callback.
+ * This callback is called at a rate specified by the user.
  *
- * With filtering frequencies is meant that too high and too low frequencies
- * are more likely to not be used, or to be used too much. So in the filtering
- * process frequencies from the extremes of the array are removed.
+ * Filtering frequencies means that too high and too low frequencies
+ * are more likely to not be used, or to be used too much. So during
+ * filtering frequencies from the extremes of the array are removed.
  */
 
 import {get} from './Request';
